@@ -21,7 +21,7 @@ class AccountController {
     const accountRepository = getCustomRepository(AccountRepository);
     const account = accountRepository.create({ name, description, balance });
     await accountRepository.save(account);
-    res.json(account);
+    res.status(201).json(account);
   }
 
   async update(req: Request, res: Response) {

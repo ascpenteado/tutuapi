@@ -24,9 +24,20 @@ class AccountController {
     res.json(account);
   }
 
-  async update(req: Request, res: Response) {}
+  async update(req: Request, res: Response) {
+    const { id } = req.params;
+    const { name, description, balance } = req.body;
+    const accountRepository = getCustomRepository(AccountRepository);
+    const account = await accountRepository.save({ id, name, description, balance });
+    res.json(account);
+  }
 
-  async delete(req: Request, res: Response) {}
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+    const accountRepository = getCustomRepository(AccountRepository);
+    const account = await accountRepository.delete({ id });
+    res.json(account);
+  }
 }
 
 export { AccountController };

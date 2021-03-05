@@ -5,6 +5,6 @@ const router = Router();
 
 const accountController = new AccountController();
 
-router.get("/accounts", accountController.show);
+router.get("/accounts", accountController.index);
 
 export default router;

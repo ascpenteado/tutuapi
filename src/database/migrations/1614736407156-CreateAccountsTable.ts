@@ -20,6 +20,10 @@ export class CreateAccountsTable1614736407156 implements MigrationInterface {
             type: "decimal",
           },
           {
+            name: "description",
+            type: "text",
+          },
+          {
             name: "created_at",
             type: "timestamp",
             default: "now()",

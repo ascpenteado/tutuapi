@@ -9,12 +9,17 @@ class AccountController {
     res.json(allAccounts);
   }
 
-  async show(req: Request, res: Response) {}
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+    const accountRepository = getCustomRepository(AccountRepository);
+    const account = await accountRepository.findOne({ id });
+    res.json(account);
+  }
 
   async create(req: Request, res: Response) {
-    const { accountData } = req.body;
+    const { name, description, balance } = req.body;
     const accountRepository = getCustomRepository(AccountRepository);
-    const account = accountRepository.create(accountData);
+    const account = accountRepository.create({ name, description, balance });
     await accountRepository.save(account);
     res.json(account);
   }

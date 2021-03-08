@@ -13,7 +13,7 @@ export class CreateTransactions1615043624398 implements MigrationInterface {
           },
           {
             name: "transaction_type",
-            type: "varchar",
+            type: "uuid",
           },
           {
             name: "description",
@@ -27,10 +27,32 @@ export class CreateTransactions1615043624398 implements MigrationInterface {
             name: "due_date",
             type: "timestamp",
           },
+          {
+            name: "accountId",
+            type: "uuid",
+          },
+        ],
+        foreignKeys: [
+          {
+            name: "accountId",
+            referencedTableName: "accounts",
+            referencedColumnNames: ["id"],
+            columnNames: ["id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+          },
+          {
+            name: "transactionTypeId",
+            referencedTableName: "transaction_types",
+            referencedColumnNames: ["id"],
+            columnNames: ["id"],
+          },
         ],
       })
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("transactions");
+  }
 }

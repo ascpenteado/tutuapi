@@ -17,7 +17,7 @@ class Account {
   balance: number;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @OneToMany(() => Transaction, (transaction) => transaction.account)
   transactions: Transaction[];

@@ -24,7 +24,7 @@ export class CreateAccountsTable1614736407156 implements MigrationInterface {
             type: "text",
           },
           {
-            name: "created_at",
+            name: "createdAt",
             type: "timestamp",
             default: "now()",
           },

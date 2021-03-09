@@ -2,7 +2,7 @@ import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateTransactions1615043624398 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(
+    await queryRunner.createTable(
       new Table({
         name: "transactions",
         columns: [
@@ -12,8 +12,8 @@ export class CreateTransactions1615043624398 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "transaction_type",
-            type: "uuid",
+            name: "transactionType",
+            type: "varchar",
           },
           {
             name: "description",
@@ -24,28 +24,31 @@ export class CreateTransactions1615043624398 implements MigrationInterface {
             type: "decimal",
           },
           {
-            name: "due_date",
+            name: "dueDate",
             type: "timestamp",
           },
           {
             name: "accountId",
             type: "uuid",
           },
+          {
+            name: "createdAt",
+            type: "timestamp",
+            default: "now()",
+          },
+          {
+            name: "updatedAt",
+            type: "timestamp",
+          },
         ],
         foreignKeys: [
           {
-            name: "accountId",
+            name: "FKAccountId",
             referencedTableName: "accounts",
             referencedColumnNames: ["id"],
-            columnNames: ["id"],
+            columnNames: ["accountId"],
             onDelete: "CASCADE",
             onUpdate: "CASCADE",
-          },
-          {
-            name: "transactionTypeId",
-            referencedTableName: "transaction_types",
-            referencedColumnNames: ["id"],
-            columnNames: ["id"],
           },
         ],
       })

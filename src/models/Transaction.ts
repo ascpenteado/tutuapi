@@ -1,15 +1,14 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Account } from "../models/Account";
-import { TransactionType } from "../models/TransactionType";
 
 @Entity("transactions")
 class Transaction {
   @PrimaryColumn()
   readonly id: string;
 
-  @ManyToOne((type) => TransactionType)
-  transction_type: TransactionType;
+  @Column()
+  transactionType: string;
 
   @Column()
   description: string;
@@ -18,16 +17,16 @@ class Transaction {
   amount: number;
 
   @Column()
-  due_date: Date;
+  dueDate: Date;
 
   @ManyToOne(() => Account, (account) => account.transactions)
   account: Account;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
   constructor() {
     if (!this.id) {
